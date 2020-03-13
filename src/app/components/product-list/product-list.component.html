@@ -1,1 +1,53 @@
-<p>product-list works!</p>
+<div *ngIf="products.length > 0; else noProducts" class="container mt-3">
+    <ul class="list-group">
+        <li class="list-group-item bg-dark text-light">
+            Product List
+        </li>
+        <li *ngFor="let p of products" class="list-group-item">
+
+            <div class="card">
+                <div class="card-header">
+                    <b>{{p.name}}</b>
+                </div>
+                <div class="card-body">
+                    {{p.description}} <br>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span>{{p.price}}€</span>
+                        <div>
+                            <button (click)="editProduct($event, p)" class="btn btn-warning">Edit</button>
+                            <button (click)="deleteProduct($event, p)" class="btn btn-danger ml-2">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="editing && editingProduct.id == p.id">
+                <form (ngSubmit)="updateProduct()">
+                    <h5 class="m-3">Edit Product</h5>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="editingProduct.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" name="description"
+                            [(ngModel)]="editingProduct.description">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" class="form-control" id="price" name="price"
+                            [(ngModel)]="editingProduct.price">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block">Update</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<ng-template #noProducts>
+    <h4>No products to show!</h4>
+    <p>Reload the page...</p>
+</ng-template>

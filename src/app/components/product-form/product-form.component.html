@@ -1,1 +1,23 @@
-<p>product-form works!</p>
+<div class="container">
+    <div class="card p-3">
+        <h5 class="mb-3">Add new product</h5>
+        <form (ngSubmit)="addProduct()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="product.name">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" name="description"
+                    [(ngModel)]="product.description">
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" name="price" [(ngModel)]="product.price">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Add Product</button>
+            </div>
+        </form>
+    </div>
+</div>
